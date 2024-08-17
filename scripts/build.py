@@ -1,6 +1,7 @@
 import os
 import shutil
 
+APP_DIR = "app"
 OUTPUT_DIR = "build"
 STATIC_ASSETS = ["CNAME", "index.html"]
 
@@ -19,7 +20,7 @@ def clear_directory(directory):
 
 def copy_assets(asset_dirs, output_dir):
     for asset_dir in asset_dirs:
-        src_dir = os.path.join("app", asset_dir)
+        src_dir = os.path.join(APP_DIR, asset_dir)
         dest_dir = os.path.join(output_dir, asset_dir)
 
         if os.path.isfile(src_dir):
