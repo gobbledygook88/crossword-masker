@@ -31,14 +31,15 @@
     #copyButton {
       margin-top: 10px;
       padding: 10px 20px;
-      background-color: #4CAF50;
+      background-color: #C8A2C8;
       color: white;
       border: none;
       cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     #copyButton:hover {
-      background-color: #45a049;
+      background-color: #B48AB4;
     }
 
     #stats {
@@ -316,16 +317,23 @@
       reader.readAsDataURL(file);
     });
 
-    copyButton.addEventListener('click', function () {
+    function copyImageToClipboard() {
       canvas.toBlob(function (blob) {
-        const item = new ClipboardItem({ 'image/png': blob });
-        navigator.clipboard.write([item]).then(function () {
-          alert('Masked image copied to clipboard!');
-        }, function (err) {
-          console.error('Failed to copy: ', err);
+        navigator.clipboard.write([
+          new ClipboardItem({ 'image/png': blob })
+        ]).then(() => {
+          // On success, change button text and color to green
+          copyButton.textContent = 'Copied Successfully!';
+          copyButton.style.backgroundColor = '#4CAF50'; // Green color
+        }).catch(err => {
+          // On failure, change button text and color to red
+          copyButton.textContent = 'Copy Failed! Try Again.';
+          copyButton.style.backgroundColor = '#f44336'; // Red color
         });
-      });
-    });
+      }, 'image/png');
+    }
+
+    copyButton.addEventListener('click', copyImageToClipboard);
   </script>
 </body>
 
