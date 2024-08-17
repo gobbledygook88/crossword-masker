@@ -258,6 +258,10 @@
 
           totalNonBlackCells++; // Count non-black cells
 
+          if (debug) {
+            console.log('ratio:', darkPixelRatio);
+          }
+
           // Mask cells with letters (partially filled cells)
           if (darkPixelRatio > fillThreshold) {
             filledCount++; // Count filled cells
@@ -294,7 +298,7 @@
           console.log('Detected cell size:', cellSize);
 
           // Mask the crossword and enable debugging
-          maskFilledCells(ctx, img.width, img.height, cellSize, 0.1, 0.8, false);
+          maskFilledCells(ctx, img.width, img.height, cellSize, 0.03, 0.8, false);
 
           // Display the copy button after masking
           copyButton.style.display = 'inline-block';
